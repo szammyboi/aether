@@ -1,7 +1,0 @@
-# ninja log v5
-0	1110	7430337531115591	build/bin-int/release/main.o	6e6ec8b33702da4b
-1111	1468	7430337533261183	build/binrelease/Aether.exe	3389c01dbcec58e9
-1	250	7430338568925892	build/bin-int/release/main.o	6e6ec8b33702da4b
-251	318	7430338569530889	build/bin/release/Aether.exe	acfabace930c4902
-0	248	7430339612650198	build/bin-int/debug/main.o	f0b12732dc91336c
-249	316	7430339613230192	build/bin/debug/Aether.exe	890c17932c6a96dc
