@@ -77,6 +77,38 @@ project "glad"
         runtime "Release"
         optimize "on"
 
+project "spdlog"
+	kind "StaticLib"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "off"
+
+	defines "SPDLOG_COMPILED_LIB"
+
+	targetdir ("build/bin/" .. outputdir)
+	objdir ("build/bin-int/")
+
+	files
+	{
+		"vendor/spdlog/src/*.cpp",
+		"vendor/spdlog/include",
+		"vendor/spdlog/include/spdlog",
+	}
+
+	includedirs
+	{
+		"vendor/spdlog/include",
+		"vendor/spdlog/include/spdlog",
+	}
+
+	filter "configurations:debug"
+        runtime "Debug"
+        symbols "on"
+
+    filter "configurations:release"
+        runtime "Release"
+        optimize "on"
+
 project "Aether"
 	kind "ConsoleApp"
 	language "C++"
@@ -98,13 +130,15 @@ project "Aether"
 	{
 		"src",
 		"vendor/glfw/include",
-		"vendor/glad/include"
+		"vendor/glad/include",
+		"vendor/spdlog/include"
 	}
 
 	links
 	{
 		"glfw",
 		"glad",
+		"spdlog",
 		"opengl32",
 		"shell32",
 		"user32",
