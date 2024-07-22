@@ -6,8 +6,12 @@
 class Window
 {
 public:
-	Window() = default;
+	Window();
 	~Window() = default;
+
+	inline bool isOpen() { return !glfwWindowShouldClose(m_Window); }
+private:
+	void Initialize();
 private:
 	GLFWwindow* m_Window;
 };

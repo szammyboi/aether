@@ -123,12 +123,10 @@ project "Aether"
 	{
 		"src/**.h",
 		"src/**.cpp",
-		"vendor/glad/include/gl.h"
 	}
 
 	includedirs
 	{
-		"src",
 		"vendor/glfw/include",
 		"vendor/glad/include",
 		"vendor/spdlog/include"
@@ -148,12 +146,11 @@ project "Aether"
 	filter "configurations:debug"
         runtime "Debug"
         symbols "on"
-		defines "AETHER_DEBUG"
 
     filter "configurations:release"
         runtime "Release"
         optimize "on"
-
+		defines "AETHER_RELEASE"
 	--[[filter "configurations:debug"
 		pchheader "pch.h"
 		pchsource "src/pch.cpp"]]

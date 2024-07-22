@@ -1,30 +1,25 @@
 #include "app.h"
+#include "log.h"
+#include "window.h"
+
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 App::App()
 {
-
+	Log::Init();
+	Initialize();
 }
 
 void App::Initialize()
 {
-	InitializeOpenGL();	
+	m_Window = std::make_shared<Window>();
 }
 
-// TODO: ERROR HANDLING
-void App::InitializeOpenGL()
+void App::Run()
 {
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	int version = gladLoadGL(glfwGetProcAddress);
-	if (version == 0)
+	while (m_Window->isOpen())
 	{
-		// return -1;
+		glfwPollEvents();
 	}
 }
-
-
