@@ -127,6 +127,7 @@ project "Aether"
 
 	includedirs
 	{
+		"src",
 		"vendor/glfw/include",
 		"vendor/glad/include",
 		"vendor/spdlog/include"
@@ -142,7 +143,7 @@ project "Aether"
 		"user32",
 		"gdi32"
 	}
-	
+
 	filter "configurations:debug"
         runtime "Debug"
         symbols "on"
@@ -151,7 +152,3 @@ project "Aether"
         runtime "Release"
         optimize "on"
 		defines "AETHER_RELEASE"
-	--[[filter "configurations:debug"
-		pchheader "pch.h"
-		pchsource "src/pch.cpp"]]
-
