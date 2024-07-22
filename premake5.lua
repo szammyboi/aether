@@ -130,6 +130,7 @@ project "Aether"
 		"src",
 		"vendor/glfw/include",
 		"vendor/glad/include",
+		"vendor/glm",
 		"vendor/spdlog/include"
 	}
 
