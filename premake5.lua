@@ -4,9 +4,78 @@ workspace "Physics"
 	configurations {"release", "debug"}
 	architecture "x86_64"
 	flags "MultiProcessorCompile"
+	location "build"
 	toolset "clang"
 
 outputdir = "%{cfg.buildcfg}"
+
+project "glfw"
+	kind "StaticLib"
+    systemversion "latest"
+	language "C"
+	staticruntime "off"
+	warnings "off"
+
+	targetdir ("build/bin/" .. outputdir)
+    objdir ("build/bin-int/")
+
+	files
+	{
+		"./vendor/glfw/include/GLFW/glfw3.h",
+		"./vendor/glfw/include/GLFW/glfw3native.h",
+		"./vendor/glfw/src/**.h",
+        "./vendor/glfw/src/**.c"
+	}
+
+	defines 
+	{
+		"_CRT_SECURE_NO_WARNINGS",
+		"_GLFW_WIN32"
+	}
+
+    links 
+    {
+        "gdi32"
+    }
+    
+	filter "configurations:debug"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:release"
+		runtime "Release"
+		optimize "speed"
+
+project "glad"
+    kind "StaticLib"
+    language "C"
+    staticruntime "off"
+
+    targetdir ("build/bin/" .. outputdir)
+    objdir ("build/bin-int/")
+
+    files
+    {
+        "./vendor/glad/include/glad/gl.h",
+        "./vendor/glad/include/KHR/khrplatform.h",
+        "./vendor/glad/src/gl.c"
+    }
+
+    includedirs
+    {
+        "./vendor/glad/include"
+    }
+
+    filter "system:windows"
+        systemversion "latest"
+
+    filter "configurations:debug"
+        runtime "Debug"
+        symbols "on"
+
+    filter "configurations:release"
+        runtime "Release"
+        optimize "on"
 
 project "Aether"
 	kind "ConsoleApp"
@@ -16,9 +85,42 @@ project "Aether"
 	targetdir("build/bin/" .. outputdir)
 	objdir("build/bin-int")
 
+	buildoptions "-xc++"
+
 	files
 	{
 		"src/**.h",
-		"src/**.cpp"
+		"src/**.cpp",
+		"vendor/glad/include/gl.h"
 	}
+
+	includedirs
+	{
+		"src",
+		"vendor/glfw/include",
+		"vendor/glad/include"
+	}
+
+	links
+	{
+		"glfw",
+		"glad",
+		"opengl32",
+		"shell32",
+		"user32",
+		"gdi32"
+	}
+	
+	filter "configurations:debug"
+        runtime "Debug"
+        symbols "on"
+		defines "AETHER_DEBUG"
+
+    filter "configurations:release"
+        runtime "Release"
+        optimize "on"
+
+	--[[filter "configurations:debug"
+		pchheader "pch.h"
+		pchsource "src/pch.cpp"]]
 
