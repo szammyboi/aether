@@ -1,6 +1,6 @@
 #pragma once
 
-#include "window.h"
+#include "aether/window.h"
 #include <memory>
 
 class App
@@ -13,5 +13,5 @@ public:
 private:
 	void Initialize();
 private:
-	std::shared_ptr<Window> m_Window;
+	std::shared_ptr<Aether::Window> m_Window;
 };

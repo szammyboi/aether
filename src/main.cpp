@@ -2,8 +2,8 @@
 // TODO: Choose a style format for function names and classes
 
 #include "app.h"
-#include "error.h"
-#include "log.h"
+#include "aether/error.h"
+#include "aether/log.h"
 
 int main()
 {
@@ -18,6 +18,6 @@ int main()
 	}
 	catch (Aether::EngineException engine_exception)
 	{
-		ENGINE_ERROR(engine_exception.what());
+		AETHER_ERROR(engine_exception.what());
 	}
 }

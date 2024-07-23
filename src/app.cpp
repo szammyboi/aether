@@ -1,24 +1,24 @@
 #include "app.h"
-#include "log.h"
-#include "window.h"
-#include "shader.h"
+#include "aether/log.h"
+#include "aether/window.h"
+#include "aether/shader.h"
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 App::App()
 {
-	Log::Init();
+	Aether::Log::Init();
 	Initialize();
 }
 
 void App::Initialize()
 {
-	WindowSpecification specification;
+	Aether::WindowSpecification specification;
 	specification.width = 900;
 	specification.height = 500;
 	specification.name = "Aether";
-	specification.fullscreen = true;
-	m_Window = std::make_shared<Window>(specification);
+	// specification.fullscreen = true;
+	m_Window = std::make_shared<Aether::Window>(specification);
 }
 
 
@@ -32,7 +32,8 @@ const float vertices[] = {
 
 void App::Run()
 {
-	Shader shader("shaders/triangle.vert", "shaders/triangle.frag");
+	Aether::Shader shader("shaders/triangle.vert", "shaders/triangle.frag");
+
 	unsigned int VBO;
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
@@ -49,7 +50,7 @@ void App::Run()
 	while (m_Window->isOpen())
 	{
 		glfwSwapBuffers(m_Window->GetNative());
-
+		glClear(GL_COLOR_BUFFER_BIT);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glfwPollEvents();

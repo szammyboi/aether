@@ -1,7 +1,7 @@
 require "ninja"
 
 workspace "Physics"
-	configurations {"release", "debug"}
+	configurations {"debug", "release" }
 	architecture "x86_64"
 	flags "MultiProcessorCompile"
 	location "build"
