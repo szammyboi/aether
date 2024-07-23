@@ -17,7 +17,7 @@ void App::Initialize()
 	specification.width = 900;
 	specification.height = 500;
 	specification.name = "Aether";
-
+	specification.fullscreen = true;
 	m_Window = std::make_shared<Window>(specification);
 }
 
