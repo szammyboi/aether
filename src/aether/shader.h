@@ -30,3 +30,12 @@ namespace Aether {
 		std::string m_FragmentSource;
 	};
 }
+
+/*
+ Theoretical API:
+	Shader shader("triangle");
+
+	will attach all shader types inside the folder "triangle"
+	maybe take a variadic argument of shader types so that the programmer can know which shader stages the code is expecting to load
+	IE. Shader<VERT, FRAG, TESS> shader("models");
+*/

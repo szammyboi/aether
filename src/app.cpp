@@ -46,12 +46,28 @@ void App::Run()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
+	double old_time = glfwGetTime();
+	float y_pos = 2.0;
+	float x_pos = 2.0;
 	shader.Use();
 	while (m_Window->isOpen())
 	{
+		double new_time = glfwGetTime();
+		double dt = new_time - old_time;
+		old_time = new_time;
 		glfwSwapBuffers(m_Window->GetNative());
 		glClear(GL_COLOR_BUFFER_BIT);
 		glBindVertexArray(VAO);
+		
+		/*if (z_pos > -0.5)
+			z_pos-=2.0*dt;
+		else
+			z_pos = 2.0;
+		*/
+		y_pos = 0.5*sin(glfwGetTime());
+		x_pos = 0.5*cos(glfwGetTime());
+		shader.SetUniform1f("y_pos", y_pos);
+		shader.SetUniform1f("x_pos", x_pos);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glfwPollEvents();
 	}
