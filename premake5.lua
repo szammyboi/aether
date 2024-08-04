@@ -30,7 +30,8 @@ project "glfw"
 	defines 
 	{
 		"_CRT_SECURE_NO_WARNINGS",
-		"_GLFW_WIN32"
+		"_GLFW_WIN32",
+		"_NO_CRT_STDIO_INLINE"
 	}
 
     links 
@@ -117,7 +118,7 @@ project "Aether"
 	targetdir("build/bin/" .. outputdir)
 	objdir("build/bin-int")
 
-	buildoptions "-xc++"
+	buildoptions {"-xc++", "-Wdeprecated-declarations", "-Wno-deprecated"}
 
 	files
 	{
